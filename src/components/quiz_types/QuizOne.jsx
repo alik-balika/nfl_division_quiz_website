@@ -290,6 +290,40 @@ const QuizOne = () => {
     setTime(0);
     teams.filter((team) => (team.correctTeamPicked = false));
     setBegin(true);
+    setDivisions([
+      {
+        name: "AFC East",
+        count: 0,
+      },
+      {
+        name: "AFC North",
+        count: 0,
+      },
+      {
+        name: "AFC South",
+        count: 0,
+      },
+      {
+        name: "AFC West",
+        count: 0,
+      },
+      {
+        name: "NFC East",
+        count: 0,
+      },
+      {
+        name: "NFC North",
+        count: 0,
+      },
+      {
+        name: "NFC South",
+        count: 0,
+      },
+      {
+        name: "NFC West",
+        count: 0,
+      },
+    ]);
   };
 
   const formattedTime = (time) => {
@@ -301,8 +335,9 @@ const QuizOne = () => {
   return (
     <div>
       {/* best score/time information */}
-      <div className="flex justify-start my-10 mx-20 text-2xl font-bold">
+      <div className="flex justify-start my-10 mx-20 text-2xl font-bold border-2 border-black py-2 pl-4 max-w-md">
         <h1 className="mr-5">Best Score: {bestScore}</h1>
+        <div className="border-l border-black mx-5"></div>
         <h1>
           Best Time:{" "}
           {bestTime === Infinity ? "Not Recorded" : formattedTime(bestTime)}
