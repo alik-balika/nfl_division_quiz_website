@@ -217,34 +217,36 @@ const QuizOne = () => {
   }, [bestTime, bestScore]);
 
   const handleTeamSelection = (teamIndex) => {
+    let updatedScore = score;
     if (teams[teamIndex].division === currentDivision) {
-      setScore(score + 1);
+      updatedScore++;
       const updatedTeams = [...teams];
       updatedTeams[teamIndex].correctTeamPicked = true;
       setTeams(updatedTeams);
 
       divisions[currentDivisionIndex].count++;
 
-      console.log(divisions);
       if (divisions[currentDivisionIndex].count == 4) {
         divisions.splice(currentDivisionIndex, 1);
         setCurrentDivisionIndex(Math.floor(Math.random() * divisions.length));
       }
     } else {
-      setScore(score - 1);
+      updatedScore--;
       setWrongTeamSelectedIndex(teamIndex);
       setTimeout(() => {
         setWrongTeamSelectedIndex(null);
       }, 400);
     }
 
+    setScore(updatedScore);
+
     const allTeamsPicked = teams.every((team) => team.correctTeamPicked);
     if (allTeamsPicked) {
       setBegin(false);
 
-      if (score > bestScore) {
-        setBestScore(score);
-        localStorage.setItem("bestScoreForQuiz1", score);
+      if (updatedScore > bestScore) {
+        setBestScore(updatedScore);
+        localStorage.setItem("bestScoreForQuiz1", updatedScore);
       }
 
       if (time < bestTime) {
